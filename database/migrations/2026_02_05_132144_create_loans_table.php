@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('status');
             $table->date('start_date');
             $table->date('due_date');
             $table->timestamps();
