@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('hardware_items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('price', 8, 2);
+            $table->integer('price')->comment('Price in cents');
             $table->integer('quantity');
             $table->string('description')->nullable();
             $table->unsignedBigInteger('category_id');

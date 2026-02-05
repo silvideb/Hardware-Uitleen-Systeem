@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hardware_items_loans', function (Blueprint $table) {
+        Schema::create('loan_hardware_item', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('hardware_item_id');
             $table->unsignedBigInteger('loan_id');
+            $table->unsignedBigInteger('hardware_item_id');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hardware_items_loans');
+        Schema::dropIfExists('loan_hardware_item');
     }
 };
