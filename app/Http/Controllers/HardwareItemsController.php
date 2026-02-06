@@ -48,7 +48,8 @@ class HardwareItemsController extends Controller
      */
     public function edit(hardware_items $hardware_items)
     {
-            
+             $hardware_items = hardware_items::findorfail($hardware_items->id);
+        return view('hardware_items.edit', compact('hardware_items'));
     }
 
     /**
@@ -56,7 +57,11 @@ class HardwareItemsController extends Controller
      */
     public function update(UpdateHardwareRequest $request, hardware_items $hardware_items)
     {
-        //
+        $hardware_items = hardware_items::findorfail($hardware_items->id);
+
+        $validatedData = $request->validated();
+        $hardware_items->update($validatedData);
+        return redirect()->route('hardware_items.index')->with('success', 'Hardware item updated successfully.');
     }
 
     /**
