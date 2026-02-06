@@ -12,7 +12,8 @@ class HardwareItemsController extends Controller
      */
     public function index()
     {
-        //
+         $hardware_items = hardware_items::all();
+        return view('hardware_items.index', compact('hardware_items'));
     }
 
     /**
@@ -20,7 +21,7 @@ class HardwareItemsController extends Controller
      */
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -28,7 +29,7 @@ class HardwareItemsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**
@@ -36,7 +37,8 @@ class HardwareItemsController extends Controller
      */
     public function show(hardware_items $hardware_items)
     {
-        //
+       
+
     }
 
     /**
@@ -44,7 +46,7 @@ class HardwareItemsController extends Controller
      */
     public function edit(hardware_items $hardware_items)
     {
-        //
+            
     }
 
     /**
