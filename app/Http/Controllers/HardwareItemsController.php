@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreHardwareRequest;
+use App\Http\Requests\UpdateHardwareRequest;
 use App\Models\hardware_items;
 use Illuminate\Http\Request;
 
@@ -27,7 +29,7 @@ class HardwareItemsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreHardwareRequest $request)
     {
        
     }
@@ -52,7 +54,7 @@ class HardwareItemsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, hardware_items $hardware_items)
+    public function update(UpdateHardwareRequest $request, hardware_items $hardware_items)
     {
         //
     }
