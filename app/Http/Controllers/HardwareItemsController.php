@@ -39,7 +39,8 @@ class HardwareItemsController extends Controller
      */
     public function show(hardware_items $hardware_items)
     {
-       
+        $hardware_items = hardware_items::all();
+        return view('hardware_items.show', compact('hardware_items'));
 
     }
 
