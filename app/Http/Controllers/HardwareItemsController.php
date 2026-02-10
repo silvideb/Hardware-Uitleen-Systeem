@@ -14,7 +14,9 @@ class HardwareItemsController extends Controller
      */
     public function index()
     {
-        //
+        $categories = hardware_items::select('category')->distinct()->get();
+        $hardware_items = hardware_items::all();
+        return view('hardware.index', compact('hardware_items' , 'categories'));
     }
 
     /**
@@ -38,7 +40,7 @@ class HardwareItemsController extends Controller
      */
     public function show(hardware_items $hardware_items)
     {
-        //
+        
     }
 
     /**
@@ -54,7 +56,7 @@ class HardwareItemsController extends Controller
      */
     public function update(UpdateHardwareRequest $request, hardware_items $hardware_items)
     {
-        //
+        
     }
 
     /**
