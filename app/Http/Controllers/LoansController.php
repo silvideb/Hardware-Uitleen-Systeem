@@ -11,8 +11,9 @@ class LoansController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    { 
+       
+     
     }
 
     /**
@@ -20,7 +21,7 @@ class LoansController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

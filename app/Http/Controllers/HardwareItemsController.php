@@ -14,9 +14,8 @@ class HardwareItemsController extends Controller
      */
     public function index()
     {
-        $categories = hardware_items::select('category')->distinct()->get();
-        $hardware_items = hardware_items::all();
-        return view('hardware.index', compact('hardware_items' , 'categories'));
+         $hardware_items = hardware_items::all();
+        return view('hardware_items.index', compact('hardware_items'));
     }
 
     /**
@@ -24,7 +23,7 @@ class HardwareItemsController extends Controller
      */
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -32,7 +31,7 @@ class HardwareItemsController extends Controller
      */
     public function store(StoreHardwareRequest $request)
     {
-        //
+       
     }
 
     /**
@@ -40,7 +39,9 @@ class HardwareItemsController extends Controller
      */
     public function show(hardware_items $hardware_items)
     {
-        
+        $hardware_items = hardware_items::all();
+        return view('hardware_items.show', compact('hardware_items'));
+
     }
 
     /**
@@ -48,7 +49,8 @@ class HardwareItemsController extends Controller
      */
     public function edit(hardware_items $hardware_items)
     {
-        //
+             $hardware_items = hardware_items::findorfail($hardware_items->id);
+        return view('hardware_items.edit', compact('hardware_items'));
     }
 
     /**
@@ -56,7 +58,11 @@ class HardwareItemsController extends Controller
      */
     public function update(UpdateHardwareRequest $request, hardware_items $hardware_items)
     {
-        
+        $hardware_items = hardware_items::findorfail($hardware_items->id);
+
+        $validatedData = $request->validated();
+        $hardware_items->update($validatedData);
+        return redirect()->route('hardware_items.index')->with('success', 'Hardware item updated successfully.');
     }
 
     /**
