@@ -15,13 +15,15 @@ class Hardware_items extends Model
         'price',
         'quantity',
         'description',
+        'status',
         'category_id',
     ];
 
     public function category()
     {
-        return $this->belongsTo(category::class);
+        return $this->belongsTo(Category::class);
     }
+    
     public function loans()
     {
         return $this->belongsToMany(loans::class, 'loan_hardware_item', 'hardware_item_id', 'loan_id');

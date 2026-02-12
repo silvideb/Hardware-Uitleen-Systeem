@@ -17,7 +17,8 @@ return new class extends Migration
             $table->integer('price')->comment('Price in cents');
             $table->integer('quantity');
             $table->string('description')->nullable();
-            $table->unsignedBigInteger('category_id');
+            $table->string('status')->default('available');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
