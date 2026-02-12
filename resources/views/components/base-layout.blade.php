@@ -69,7 +69,7 @@
         <h2>Menu</h2>
         <a href="/">🏠 Home</a>
         <a href="/hardware_items">hardware items</a>
-        <a href="/category">categorie</a>
+        <a href="/categories">categorie</a>
     </div>
 
     <div class="content">

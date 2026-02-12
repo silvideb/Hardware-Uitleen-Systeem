@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\category;
+use App\Models\Hardware_item;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -12,8 +13,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $items = Hardware_item::all();
         $categories = category::all();
-        return view('admin.category.index', compact('categories'));
+        return view('categories.index', compact('categories', 'items'));
     }
 
     /**
@@ -37,8 +39,9 @@ class CategoryController extends Controller
      */
     public function show(category $category)
     {
+        $items = Hardware_item::where('category_id', $category->id)->get();
         $category = category::find($category->id);
-        return view('admin.category.show', compact('category'));
+        return view('categories.show', compact('category', 'items'));
     }
 
     /**
