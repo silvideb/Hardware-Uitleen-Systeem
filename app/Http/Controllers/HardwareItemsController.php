@@ -41,7 +41,9 @@ class HardwareItemsController extends Controller
      */
     public function create()
     {
-       
+        $categories = Category::all();
+        
+        return view('hardware_items.create', compact('categories'));
     }
 
     /**
@@ -49,7 +51,9 @@ class HardwareItemsController extends Controller
      */
     public function store(StoreHardwareRequest $request)
     {
-       
+        $validatedData = $request->validated();
+        Hardware_item::create($validatedData);
+        return redirect()->route('hardware_items.index')->with('success', 'Hardware item created successfully.');
     }
 
     /**
