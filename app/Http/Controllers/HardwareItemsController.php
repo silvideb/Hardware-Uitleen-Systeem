@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreHardwareRequest;
 use App\Http\Requests\UpdateHardwareRequest;
 use App\Models\Category;
+use App\Models\Hardware_item;
 use App\Models\hardware_items;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,9 @@ class HardwareItemsController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
-        $items = hardware_items::all();
+        $items = Hardware_item::all();
 
-        $query = hardware_items::query();
+        $query = Hardware_item::query();
 
     if ($request->filled('category')) {
         $query->whereHas('category', function($q) use ($request) {
