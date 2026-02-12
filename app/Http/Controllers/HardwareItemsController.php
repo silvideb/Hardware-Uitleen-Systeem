@@ -20,16 +20,19 @@ class HardwareItemsController extends Controller
 
         $query = hardware_items::query();
 
-        if ($request->filled('category')) {
+    if ($request->filled('category')) {
         $query->whereHas('category', function($q) use ($request) {
             $q->where('categories.id', $request->category);
         });
-        
     }
 
-        $items = $query->get();
+    if ($request->filled('name')) {
+        $query->where('name', 'like', '%' . $request->name . '%');
+    }
 
-        return view('hardware_items.index', compact('items', 'categories'));
+    $items = $query->get();
+
+    return view('hardware_items.index', compact('items', 'categories'));
     }
 
     /**

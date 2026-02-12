@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Loans extends Model
+class Loan extends Model
 {
     /** @use HasFactory<\Database\Factories\LoansFactory> */
     use HasFactory;
@@ -19,7 +19,7 @@ class Loans extends Model
 
     public function hardware_items()
     {
-        return $this->belongsToMany(Hardware_items::class, 'loan_hardware_item', 'loan_id', 'hardware_item_id');
+        return $this->belongsToMany(Hardware_item::class, 'loan_hardware_item', 'loan_id', 'hardware_item_id');
     }
 
     public function user()
