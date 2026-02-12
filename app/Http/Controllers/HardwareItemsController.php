@@ -55,10 +55,10 @@ class HardwareItemsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(hardware_items $hardwareItem)
+    public function show(Hardware_item $hardwareItem)
     {
         $categories = Category::all();
-        $item = hardware_items::findOrFail($hardwareItem->id);
+        $item = Hardware_item::findOrFail($hardwareItem->id);
         return view('hardware_items.show', compact('item', 'categories'));
 
     }
@@ -66,18 +66,18 @@ class HardwareItemsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(hardware_items $hardware_items)
+    public function edit(Hardware_item $hardware_item)
     {
-             $items = hardware_items::findorfail($hardware_items->id);
+             $items = Hardware_item::findorfail($hardware_item->id);
         return view('hardware_items.edit', compact('items'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateHardwareRequest $request, hardware_items $hardware_items)
+    public function update(UpdateHardwareRequest $request, Hardware_item $hardware_item)
     {
-        $hardware_items = hardware_items::findorfail($hardware_items->id);
+        $hardware_items = Hardware_item::findorfail($hardware_item->id);
 
         $validatedData = $request->validated();
         $hardware_items->update($validatedData);
@@ -87,8 +87,9 @@ class HardwareItemsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(hardware_items $hardware_items)
+    public function destroy(Hardware_item $hardware_item)
     {
-        //
+        $hardware_item->delete();
+        return redirect()->route('hardware_items.index')->with('success', 'Hardware item deleted successfully.');
     }
 }

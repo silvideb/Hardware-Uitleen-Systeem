@@ -28,4 +28,10 @@ class Hardware_item extends Model
     {
         return $this->belongsToMany(Loan::class, 'loan_hardware_item', 'hardware_item_id', 'loan_id');
     }
+
+    public function getPriceInEuroAttribute()
+    {
+    return number_format($this->price / 100, 2, ',', '.');
+    }   
+
 }

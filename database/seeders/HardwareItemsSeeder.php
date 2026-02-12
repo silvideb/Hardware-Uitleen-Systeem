@@ -12,6 +12,6 @@ class HardwareItemsSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Hardware_items::factory()->count(50)->create();
+        \App\Models\Hardware_item::factory()->count(50)->create();
     }
 }
