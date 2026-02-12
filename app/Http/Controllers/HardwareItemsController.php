@@ -55,10 +55,11 @@ class HardwareItemsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(hardware_items $hardware_items)
+    public function show(hardware_items $hardwareItem)
     {
-        $hardware_items = hardware_items::all();
-        return view('hardware_items.show', compact('hardware_items'));
+        $categories = Category::all();
+        $item = hardware_items::findOrFail($hardwareItem->id);
+        return view('hardware_items.show', compact('item', 'categories'));
 
     }
 
@@ -67,8 +68,8 @@ class HardwareItemsController extends Controller
      */
     public function edit(hardware_items $hardware_items)
     {
-             $hardware_items = hardware_items::findorfail($hardware_items->id);
-        return view('hardware_items.edit', compact('hardware_items'));
+             $items = hardware_items::findorfail($hardware_items->id);
+        return view('hardware_items.edit', compact('items'));
     }
 
     /**
