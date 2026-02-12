@@ -72,7 +72,7 @@ class HardwareItemsController extends Controller
      */
     public function edit(Hardware_item $hardware_item)
     {
-             $items = Hardware_item::findorfail($hardware_item->id);
+        $items = Hardware_item::findorfail($hardware_item->id);
         return view('hardware_items.edit', compact('items'));
     }
 
