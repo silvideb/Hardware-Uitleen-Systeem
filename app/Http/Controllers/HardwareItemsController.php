@@ -42,7 +42,7 @@ class HardwareItemsController extends Controller
     public function create()
     {
         $categories = Category::all();
-        
+
         return view('hardware_items.create', compact('categories'));
     }
 

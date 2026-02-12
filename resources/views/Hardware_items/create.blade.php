@@ -34,7 +34,11 @@
                     <input type="number" id="price" name="price" required min="0" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div>
-                    <label for="status" class="block text-sm font-medium text-gray-700">Status:</label> <select id="status" name="status" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="available">Available</option> <option value="unavailable">Unavailable</option> </select>
+                    <label for="status" class="block text-sm font-medium text-gray-700">Status:</label> 
+                    <select id="status" name="status" required class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"> 
+                        <option value="available">Available</option> 
+                        <option value="unavailable">Unavailable</option> 
+                    </select>
                 </div>
                 <div>
                     <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
