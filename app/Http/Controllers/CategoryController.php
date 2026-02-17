@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\category;
 use App\Models\Hardware_item;
 use Illuminate\Http\Request;
@@ -23,15 +24,17 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        category::create($validatedData);
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     /**
@@ -49,7 +52,9 @@ class CategoryController extends Controller
      */
     public function edit(category $category)
     {
-        //
+        $items = Hardware_item::where('category_id', $category->id)->get();
+        $category = category::find($category->id);
+        return view('categories.edit', compact('category', 'items'));
     }
 
     /**
@@ -57,7 +62,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, category $category)
     {
-        //
+        $category = category::findorfail($category->id);
+
+        $validatedData = $request->validated();
+        $category->update($validatedData);
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
     /**
@@ -65,6 +74,7 @@ class CategoryController extends Controller
      */
     public function destroy(category $category)
     {
-        //
+         $category->delete();
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }

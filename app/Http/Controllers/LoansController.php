@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hardware_item;
+use App\Models\Loan;
 use App\Models\loans;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,10 @@ class LoansController extends Controller
      */
     public function index()
     { 
-       
+        $loans_items = Loan::with('hardware_items')->get();
+        $items = Hardware_item::all();
+        $loans = Loan::all();
+        return view('loans.index', compact('loans', 'items'));
      
     }
 
@@ -35,15 +40,15 @@ class LoansController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(loans $loans)
+    public function show(Loan $loan)
     {
-        //
+        return view('loans.show', compact('loan')); 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(loans $loans)
+    public function edit(Loan $loan)
     {
         //
     }
@@ -51,7 +56,7 @@ class LoansController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, loans $loans)
+    public function update(Request $request, Loan $loan )
     {
         //
     }
@@ -59,8 +64,9 @@ class LoansController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(loans $loans)
+    public function destroy(Loan $loan)
     {
-        //
+        $loan->delete();
+        return redirect()->route('loans.index');
     }
 }

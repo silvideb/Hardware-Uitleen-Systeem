@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\loans>
  */
-class LoansFactory extends Factory
+class LoanFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,11 @@ class LoansFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            
+            'user_id' => \App\Models\User::factory(),        
+            'due_date' => $this->faker->date(),
+            'start_date' => $this->faker->date(),
+            'status' => $this->faker->randomElement(['active', 'returned', 'overdue']),
         ];
     }
 }

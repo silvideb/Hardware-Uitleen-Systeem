@@ -15,6 +15,8 @@ class Loan extends Model
         'user_id',
         'start_date',
         'due_date',
+        'status',
+        
     ];
 
     public function hardware_items()
