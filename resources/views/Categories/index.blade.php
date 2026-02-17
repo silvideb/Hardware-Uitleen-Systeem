@@ -24,7 +24,6 @@
                         <tr class="hover:bg-gray-100"> 
                             <td class="py-2 px-4 border-b">{{$category->name }}</td>
                             <td class="py-2 px-4 border-b">{{ $category->hardwareItems()->count() }}</td>
-                           
                             <td class="py-2 px-4 border-b">
                                 <div class="flex gap-2 justify-center">
                                     <a href="{{ route('categories.show', $category) }}" class="bg-blue-300 text-white px-2 py-1 rounded">Bekijk</a>

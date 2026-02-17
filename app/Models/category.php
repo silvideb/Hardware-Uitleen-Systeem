@@ -14,4 +14,11 @@ class Category extends Model
         'name',
         'description',
     ];
+
+
+
+    public function hardwareItems()
+    {
+        return $this->hasMany(Hardware_item::class);
+    }
 }
