@@ -70,6 +70,8 @@
         <a href="/">🏠 Home</a>
         <a href="/hardware_items">hardware items</a>
         <a href="/categories">categorie</a>
+         <a href="/loans">loans</a>
+          <a href="/users">gebruikers</a>
     </div>
 
     <div class="content">

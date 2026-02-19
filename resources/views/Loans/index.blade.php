@@ -15,6 +15,7 @@
         <table class="min-w-full bg-white border border-gray-200">
                 <thead>
                         <th class="py-2 px-4 border-b">Loan Id</th> 
+                        <th class="py-2 px-4 border-b">Gebruiker</th> 
                         <th class="py-2 px-4 border-b">Status</th>
                         <th class="py-2 px-4 border-b">Acties</th>
                     </tr>
@@ -24,6 +25,7 @@
                         <tr class="hover:bg-gray-100"> 
 
                             <td class="py-2 px-4 border-b">{{$loan->id}}</td>
+                            <td class="py-2 px-4 border-b">{{$loan->user->name }}</td>
                             <td class="py-2 px-4 border-b">{{$loan->status }}</td>
                             <td class="py-2 px-4 border-b">
                                 <div class="flex gap-2 justify-center">
