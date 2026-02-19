@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreLoanRequest;
 use App\Models\Hardware_item;
 use App\Models\Loan;
 use App\Models\loans;
@@ -32,9 +33,20 @@ class LoansController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreLoanRequest $storeLoanRequest)
     {
-        //
+        // 1. Maak de lening aan (user_id wordt opgeslagen)
+        $loan = Loan::create([
+            'user_id' => auth()->id(), // Of $request->user_id
+        ]);
+
+        // 2. Pak de ID's van de geselecteerde hardware (bijv. uit een checkbox array)
+        $hardwareIds = $storeLoanRequest->input('hardware_items'); // Bijv. [1, 4, 7]
+
+        // 3. Koppel de hardware aan de lening in de tussentabel
+        $loan->hardwareItems()->attach($hardwareIds);
+
+        return redirect()->back()->with('success', 'Lening succesvol aangemaakt!');
     }
 
     /**

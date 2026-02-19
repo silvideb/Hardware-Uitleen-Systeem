@@ -25,8 +25,6 @@
 
                             <td class="py-2 px-4 border-b">{{$loan->id}}</td>
                             <td class="py-2 px-4 border-b">{{$loan->status }}</td>
-                            
-                           
                             <td class="py-2 px-4 border-b">
                                 <div class="flex gap-2 justify-center">
                                     <a href="{{ route('loans.show', $loan) }}" class="bg-blue-300 text-white px-2 py-1 rounded">Bekijk</a>
@@ -41,5 +39,5 @@
                     @endforeach
                 </tbody>
             </table>
-           
+        </div>
 </x-base-layout>

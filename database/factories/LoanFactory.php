@@ -18,7 +18,8 @@ class LoanFactory extends Factory
     {
         return [
             
-            'user_id' => \App\Models\User::factory(),        
+            'user_id' => \App\Models\User::factory(),
+            'hardware_item_id' => \App\Models\Hardware_item::factory(),        
             'due_date' => $this->faker->date(),
             'start_date' => $this->faker->date(),
             'status' => $this->faker->randomElement(['active', 'returned', 'overdue']),

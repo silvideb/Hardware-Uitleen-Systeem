@@ -13,19 +13,11 @@ class Loan extends Model
 
     protected $fillable = [
         'user_id',
+        'hardware_item_id',
         'start_date',
         'due_date',
         'status',
         
     ];
 
-    public function hardware_items()
-    {
-        return $this->belongsToMany(Hardware_item::class, 'loan_hardware_item', 'loan_id', 'hardware_item_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }

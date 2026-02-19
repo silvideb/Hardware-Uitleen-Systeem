@@ -24,9 +24,10 @@ class Hardware_item extends Model
         return $this->belongsTo(Category::class);
     }
     
-    public function loans()
+    public function users()
     {
-        return $this->belongsToMany(Loan::class, 'loan_hardware_item', 'hardware_item_id', 'loan_id');
+        return $this->belongsToMany(User::class, 'loans')
+                ->withTimestamps();
     }
 
     public function getPriceInEuroAttribute()
