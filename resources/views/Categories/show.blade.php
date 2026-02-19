@@ -28,13 +28,4 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
 </x-base-layout>
