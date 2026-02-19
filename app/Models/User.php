@@ -45,10 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function hardwareItems()
+    public function loans()
     {
         // We koppelen User aan HardwareItem via de 'loans' tabel
-        return $this->belongsToMany(Hardware_item::class, 'loans')
-                ->withTimestamps(); // Zorgt dat created_at in loans gevuld wordt
+        return $this->hasMany(Loan::class);
     }
 }

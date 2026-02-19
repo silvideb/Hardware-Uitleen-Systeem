@@ -20,4 +20,15 @@ class Loan extends Model
         
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function hardwareItem()
+    {
+        return $this->belongsTo(Hardware_item::class);
+    }
+
+   
 }

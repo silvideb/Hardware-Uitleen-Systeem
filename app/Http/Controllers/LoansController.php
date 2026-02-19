@@ -15,11 +15,10 @@ class LoansController extends Controller
      */
     public function index()
     { 
-        $loans_items = Loan::with('hardware_items')->get();
+        $loans_items = Loan::all();
         $items = Hardware_item::all();
         $loans = Loan::all();
         return view('loans.index', compact('loans', 'items'));
-     
     }
 
     /**
