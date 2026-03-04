@@ -70,21 +70,21 @@ class HardwareItemsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Hardware_item $hardware_item)
+    public function edit(Hardware_item $hardwareItem)
     {
-        $items = Hardware_item::findorfail($hardware_item->id);
-        return view('hardware_items.edit', compact('items'));
+        $categories = Category::all();
+        return view('hardware_items.edit', compact('hardwareItem', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateHardwareRequest $request, Hardware_item $hardware_item)
+    public function update(UpdateHardwareRequest $request, Hardware_item $hardwareItem)
     {
-        $hardware_items = Hardware_item::findorfail($hardware_item->id);
+        $hardwareItem = Hardware_item::findorfail($hardwareItem->id);
 
         $validatedData = $request->validated();
-        $hardware_items->update($validatedData);
+        $hardwareItem->update($validatedData);
         return redirect()->route('hardware_items.index')->with('success', 'Hardware item updated successfully.');
     }
 

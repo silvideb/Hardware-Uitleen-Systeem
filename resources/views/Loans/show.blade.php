@@ -15,7 +15,7 @@
                         <span class="inline-block px-3 py-1 rounded-full text-sm font-medium {{ $loan->status == 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                             {{ ucfirst($loan->status) }}
                         </span>
-                    <p class="text-gray-700 mb-2"><strong>Geleende items:</strong>{{ $loan->hardwareItem->name}}</p>
+                    <p class="text-gray-700 mb-2"><strong>Geleende items:</strong> <a href="{{ route('hardware_items.show', $loan->hardwareItem->id) }}" class="text-blue-600 hover:text-blue-800 hover:underline">{{ $loan->hardwareItem->name }}</a></p>
                     </p>
                 </div>
 
