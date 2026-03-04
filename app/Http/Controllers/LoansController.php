@@ -53,7 +53,9 @@ class LoansController extends Controller
      */
     public function show(Loan $loan)
     {
-        return view('loans.show', compact('loan')); 
+       
+        $items = Hardware_item::all();
+        return view('loans.show', compact('loan', 'items')); 
     }
 
     /**
