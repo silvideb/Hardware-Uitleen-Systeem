@@ -36,7 +36,7 @@ class LoansController extends Controller
     {
         // 1. Maak de lening aan (user_id wordt opgeslagen)
         $loan = Loan::create([
-            'user_id' => auth()->id(), // Of $request->user_id
+            'user_id' => $storeLoanRequest->user_id, // Of $request->user_id
         ]);
 
         // 2. Pak de ID's van de geselecteerde hardware (bijv. uit een checkbox array)
