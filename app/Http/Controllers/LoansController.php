@@ -26,7 +26,8 @@ class LoansController extends Controller
      */
     public function create()
     {
-        
+        $items = Hardware_item::all();
+        return view('loans.create', compact('items'));
     }
 
     /**

@@ -24,6 +24,7 @@ Route::delete('categories/{category}', [\App\Http\Controllers\CategoryController
 
 Route::get('/loans', [App\Http\Controllers\LoansController::class, 'index'])->name('loans.index');
 Route::get('loans/create', [\App\Http\Controllers\LoansController::class, 'create'])->name('loans.create');
+Route::post('loans', [\App\Http\Controllers\LoansController::class, 'store'])->name('loans.store');
 Route::get('loans/{loan}', [\App\Http\Controllers\LoansController::class, 'show'])->name('loans.show');
 Route::get('loans/{loan}/edit', [\App\Http\Controllers\LoansController::class, 'edit'])->name('loans.edit');
 Route::put('loans/{loan}', [\App\Http\Controllers\LoansController::class, 'update'])->name('loans.update');

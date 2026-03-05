@@ -25,7 +25,7 @@ class StoreLoanRequest extends FormRequest
             'user_id' => 'required|exists:users,id',
             'start_date' => 'required|date',
             'due_date' => 'required|date|after_or_equal:start_date',
-            'status' => 'required|string|in:active,returned,overdue,pending',
+            'status' => 'default|string|in:pending',
         ];
     }
 }
