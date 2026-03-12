@@ -35,16 +35,14 @@ class LoansController extends Controller
      */
     public function store(StoreLoanRequest $storeLoanRequest)
     {
-        // 1. Maak de lening aan (user_id wordt opgeslagen)
-        $loan = Loan::create([
-            'user_id' => $storeLoanRequest->user_id, // Of $request->user_id
-        ]);
+        $validatedData = $storeLoanRequest->validated();
+        Loan::create(
+            
+            array_merge($validatedData, ['status' => 'pending'])
+        
+        );
 
-        // 2. Pak de ID's van de geselecteerde hardware (bijv. uit een checkbox array)
-        $hardwareIds = $storeLoanRequest->input('hardware_items'); // Bijv. [1, 4, 7]
 
-        // 3. Koppel de hardware aan de lening in de tussentabel
-        $loan->hardwareItems()->attach($hardwareIds);
 
         return redirect()->back()->with('success', 'Lening succesvol aangemaakt!');
     }
@@ -54,7 +52,7 @@ class LoansController extends Controller
      */
     public function show(Loan $loan)
     {
-       
+    
         $items = Hardware_item::all();
         return view('loans.show', compact('loan', 'items')); 
     }

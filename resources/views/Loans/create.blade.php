@@ -10,14 +10,14 @@
                         @csrf
 
                         <div class="form-group mb-3">
-                            {{-- <label for="user_id">{{ __('User') }}</label>
+                            <label for="user_id">{{ __('User') }}</label>
                             <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                            <input type="text" class="form-control" value="{{ auth()->user()->name }}" disabled> --}}
+                            <input type="text" class="form-control" value="{{ auth()->user()->name }}" disabled>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="hardware_id">{{ __('Hardware Item') }}</label>
-                            <select name="hardware_id" class="form-control" required>
+                            <label for="hardware_item_id">{{ __('Hardware Item') }}</label>
+                            <select name="hardware_item_id" class="form-control" required>
                                 <option value="">{{ __('Select hardware item') }}</option>
                                 @foreach($items as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
