@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\category;
 use App\Models\Hardware_item;
 use Illuminate\Http\Request;
@@ -60,7 +61,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, category $category)
+    public function update(UpdateCategoryRequest  $request, category $category)
     {
         $category = category::findorfail($category->id);
 

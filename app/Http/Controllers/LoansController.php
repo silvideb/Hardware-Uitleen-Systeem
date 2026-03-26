@@ -6,6 +6,7 @@ use App\Http\Requests\StoreLoanRequest;
 use App\Models\Hardware_item;
 use App\Models\Loan;
 use App\Models\loans;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LoansController extends Controller
@@ -62,7 +63,10 @@ class LoansController extends Controller
      */
     public function edit(Loan $loan)
     {
-        //
+         $user = User::all();
+         $Loans = Loan::find($loan->id);
+         $hardwareItems = Hardware_item::all();
+        return view('loans.edit', compact('loan', 'user'));
     }
 
     /**
@@ -70,7 +74,7 @@ class LoansController extends Controller
      */
     public function update(Request $request, Loan $loan )
     {
-        //
+       
     }
 
     /**
