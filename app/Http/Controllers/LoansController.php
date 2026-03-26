@@ -22,6 +22,50 @@ class LoansController extends Controller
     }
 
     /**
+     * Display pending loans (admin only).
+     */
+    public function pendingLoans()
+    {
+        $loans = Loan::where('status', 'pending')->get();
+        $items = Hardware_item::all();
+        return view('loans.pending', compact('loans', 'items'));
+    }
+
+    /**
+     * Accept a loan and change status to active.
+     */
+    public function accepteert(Loan $loan)
+    {
+        $loan->update(['status' => 'active']);
+        return redirect()->route('loans.index')->with('success', 'Lening geaccepteerd!');
+    }
+
+    /**
+     * Show form to reject a loan.
+     */
+    public function rejectForm(Loan $loan)
+    {
+        return view('loans.reject', compact('loan'));
+    }
+
+    /**
+     * Reject a loan with reason.
+     */
+    public function reject(Request $request, Loan $loan)
+    {
+        $validated = $request->validate([
+            'reject_reason' => 'required|string|max:1000',
+        ]);
+
+        $loan->update([
+            'status' => 'rejected',
+            'reject_reason' => $validated['reject_reason'],
+        ]);
+
+        return redirect()->route('loans.pending')->with('success', 'Lening afgewezen!');
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -63,6 +107,7 @@ class LoansController extends Controller
     public function edit(Loan $loan)
     {
         //
+
     }
 
     /**

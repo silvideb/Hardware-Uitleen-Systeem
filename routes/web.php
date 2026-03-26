@@ -34,6 +34,10 @@ Route::put('categories/{category}', [\App\Http\Controllers\CategoryController::c
 Route::delete('categories/{category}', [\App\Http\Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
 
 Route::get('/loans', [App\Http\Controllers\LoansController::class, 'index'])->name('loans.index');
+Route::get('/loans/pending', [App\Http\Controllers\LoansController::class, 'pendingLoans'])->name('loans.pending');
+Route::get('/loans/accepteert/{loan}', [App\Http\Controllers\LoansController::class, 'accepteert'])->name('loans.accepteert');
+Route::get('/loans/{loan}/reject', [App\Http\Controllers\LoansController::class, 'rejectForm'])->name('loans.reject-form');
+Route::post('/loans/{loan}/reject', [App\Http\Controllers\LoansController::class, 'reject'])->name('loans.reject');
 Route::get('loans/create', [\App\Http\Controllers\LoansController::class, 'create'])->name('loans.create');
 Route::post('loans', [\App\Http\Controllers\LoansController::class, 'store'])->name('loans.store');
 Route::get('loans/{loan}', [\App\Http\Controllers\LoansController::class, 'show'])->name('loans.show');
