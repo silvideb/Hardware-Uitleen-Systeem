@@ -17,7 +17,7 @@ class Loan extends Model
         'start_date',
         'due_date',
         'status',
-        
+        'reject_reason',
     ];
 
    protected function casts()

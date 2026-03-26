@@ -2,15 +2,13 @@
     <div class="container mx-auto p-4">
         <div class="flex justify-between mb-4">
             <div>
-                <h1 class="text-2xl font-bold">Leningen</h1>
+                <h1 class="text-2xl font-bold">Wachtende Leningen</h1>
             </div>
 
             <div class="flex gap-2">
-                @if(auth()->check() && auth()->user()->is_admin)
-                    <a href="{{ route('loans.pending') }}" class="bg-purple-500 text-white px-4 py-2 rounded">
-                        Wachtende Leningen
-                    </a>
-                @endif
+                <a href="{{ route('loans.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded">
+                    Terug naar Leningen
+                </a>
                 <a href="{{ route('loans.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
                     Nieuwe Lening
                 </a>
@@ -34,12 +32,9 @@
                             <td class="py-2 px-4 border-b">{{$loan->status }}</td>
                             <td class="py-2 px-4 border-b">
                                 <div class="flex gap-2 justify-center">
-                                    <a href="{{ route('loans.show', $loan) }}" class="bg-blue-300 text-white px-2 py-1 rounded">Bekijk</a>
-                                    <a href="{{ route('loans.edit', $loan) }}" class="bg-yellow-300 text-white px-2 py-1 rounded">Bewerk</a>
-                                    <form action="{{ route('loans.destroy', $loan) }}" method="POST" style="display:inline;">
+                                    <a href="{{ route('loans.accepteert', $loan) }}" class="bg-green-300 text-white px-2 py-1 rounded">accepteert</a>
+                                    <a href="{{ route('loans.reject-form', $loan) }}" class="bg-red-500 text-white px-2 py-1 rounded">Afwijzen</a>
                                         @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded">Verwijder</button>
                                 </form>
                             </td>
                         </tr>

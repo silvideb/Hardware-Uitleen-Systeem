@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -55,11 +56,12 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
         $user = User::findorfail($user->id);
 
         $validatedData = $request->validated();
+        $validatedData['is_admin'] = $request->has('is_admin') ? (bool) $request->input('is_admin') : false;
         $user->update($validatedData);
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
