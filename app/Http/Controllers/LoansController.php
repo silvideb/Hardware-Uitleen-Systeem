@@ -89,7 +89,7 @@ class LoansController extends Controller
 
 
 
-        return redirect()->back()->with('success', 'Lening succesvol aangemaakt!');
+        return redirect()->route('loans.index')->with('success', 'Lening is aangemaakt!');
     }
 
     /**
