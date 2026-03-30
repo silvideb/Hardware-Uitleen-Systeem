@@ -22,9 +22,10 @@ class StoreLoanRequest extends FormRequest
     public function rules(): array
     {
         return [
-             'name' => 'required|string|max:10',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'user_id' => 'required|exists:users,id',
+            'hardware_item_id' => 'required|exists:hardware_items,id',
+            'start_date' => 'required|date',
+            'due_date' => 'required|date|after_or_equal:start_date',
         ];
     }
 }
