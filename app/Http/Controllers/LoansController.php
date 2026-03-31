@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLoanRequest;
 use App\Models\Hardware_item;
 use App\Models\Loan;
-use App\Models\loans;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,6 +18,18 @@ class LoansController extends Controller
         $loans_items = Loan::all();
         $items = Hardware_item::all();
         $loans = Loan::all();
+
+        // 1. Controleer of de gebruiker een admin is
+    if (auth()->user()->is_admin) {
+        // Admin ziet alles
+        $loans = Loan::with('user')->get();
+    } else {
+        // Normale gebruiker ziet alleen eigen leningen
+        $loans = auth()->user()->loans()->with('user')->get();
+        
+        // Alternatieve methode als de relatie niet in je User model staat:
+        // $loans = Loan::where('user_id', auth()->id())->with('user')->get();
+    }
         return view('loans.index', compact('loans', 'items'));
     }
 
