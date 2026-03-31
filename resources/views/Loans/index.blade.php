@@ -39,7 +39,12 @@
 
                             <td class="py-2 px-4 border-b">{{$loan->id}}</td>
                             <td class="py-2 px-4 border-b">{{$loan->user->name }}</td>
-                            <td class="py-2 px-4 border-b">{{$loan->status }}</td>
+                            <td class="py-2 px-4 border-b">
+                            <span class="inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full {{ $loan->status_badge_class }}">
+                            {{ $loan->status_icon }}
+                            {{ $loan->status_label }}
+                            </span>
+                            </td>
                             <td class="py-2 px-4 border-b">
                                 <div class="flex gap-2 justify-center">
                                     <a href="{{ route('loans.show', $loan) }}" class="bg-blue-300 text-white px-2 py-1 rounded">Bekijk</a>
