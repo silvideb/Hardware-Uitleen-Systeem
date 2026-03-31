@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLoanRequest;
+use App\Http\Requests\UpdateLoanRequest;
+use App\Http\Requests\UpdateLoansRequest;
 use App\Models\Hardware_item;
 use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class LoansController extends Controller
 {
@@ -118,18 +121,20 @@ class LoansController extends Controller
      */
     public function edit(Loan $loan)
     {
-         $user = User::all();
+         $users = User::all();
          $Loans = Loan::find($loan->id);
          $hardwareItems = Hardware_item::all();
-        return view('loans.edit', compact('loan', 'user'));
+        return view('loans.edit', compact('loan', 'users' , 'hardwareItems'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Loan $loan )
+    public function update(UpdateLoansRequest $updateLoanRequest, Loan $loan)
     {
-       
+        $validatedData = $updateLoanRequest->validated();
+        $loan->update($validatedData);
+        return redirect()->route('loans.index')->with('success', 'Lening geüpdatet!');
     }
 
     /**
@@ -139,5 +144,14 @@ class LoansController extends Controller
     {
         $loan->delete();
         return redirect()->route('loans.index');
+    }
+
+    public function markOverdue()
+    {   
+         Loan::whereDate('due_date', '<', Carbon::today())
+        ->where('status', '!=', 'returned')
+        ->update(['status' => 'overdue']);
+
+         return back()->with('success', 'Overdue leningen bijgewerkt');
     }
 }
