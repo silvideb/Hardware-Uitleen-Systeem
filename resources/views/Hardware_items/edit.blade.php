@@ -36,6 +36,7 @@
                             <option value="">Select Status</option>
                             <option value="available" {{ old('status', $hardwareItem->status) === 'available' ? 'selected' : '' }}>Available</option>
                             <option value="unavailable" {{ old('status', $hardwareItem->status) === 'unavailable' ? 'selected' : '' }}>Unavailable</option>
+                            <option value="defective" {{ old('status', $hardwareItem->status) === 'defective' ? 'selected' : '' }}>Defective</option>
                         </select>
                     </div>
 
