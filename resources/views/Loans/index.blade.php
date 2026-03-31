@@ -7,9 +7,17 @@
 
             <div class="flex gap-2">
                 @if(auth()->check() && auth()->user()->is_admin)
+
                     <a href="{{ route('loans.pending') }}" class="bg-purple-500 text-white px-4 py-2 rounded">
                         Wachtende Leningen
                     </a>
+
+                    <form action="{{ route('loans.checkOverdue') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">
+                    Check Overdue Leningen
+                         </button>
+</form>
                 @endif
                 <a href="{{ route('loans.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
                     Nieuwe Lening

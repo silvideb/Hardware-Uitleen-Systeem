@@ -38,6 +38,8 @@ Route::get('/loans/pending', [App\Http\Controllers\LoansController::class, 'pend
 Route::get('/loans/accepteert/{loan}', [App\Http\Controllers\LoansController::class, 'accepteert'])->name('loans.accepteert');
 Route::get('/loans/{loan}/reject', [App\Http\Controllers\LoansController::class, 'rejectForm'])->name('loans.reject-form');
 Route::post('/loans/{loan}/reject', [App\Http\Controllers\LoansController::class, 'reject'])->name('loans.reject');
+Route::post('/loans/check-overdue', [App\Http\Controllers\LoansController::class, 'markOverdue'])
+    ->name('loans.checkOverdue');
 Route::get('loans/create', [\App\Http\Controllers\LoansController::class, 'create'])->name('loans.create');
 Route::post('loans', [\App\Http\Controllers\LoansController::class, 'store'])->name('loans.store');
 Route::get('loans/{loan}', [\App\Http\Controllers\LoansController::class, 'show'])->name('loans.show');

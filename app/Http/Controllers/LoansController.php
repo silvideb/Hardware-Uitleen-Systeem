@@ -9,6 +9,7 @@ use App\Models\Hardware_item;
 use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class LoansController extends Controller
 {
@@ -143,5 +144,14 @@ class LoansController extends Controller
     {
         $loan->delete();
         return redirect()->route('loans.index');
+    }
+
+    public function markOverdue()
+    {   
+         Loan::whereDate('due_date', '<', Carbon::today())
+        ->where('status', '!=', 'returned')
+        ->update(['status' => 'overdue']);
+
+         return back()->with('success', 'Overdue leningen bijgewerkt');
     }
 }
