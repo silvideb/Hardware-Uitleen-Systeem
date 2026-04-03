@@ -26,7 +26,7 @@ class UpdateHardwareRequest extends FormRequest
             'price' => 'required|integer|min:0',
             'quantity' => 'required|integer|min:0',
             'description' => 'nullable|string',
-            'status' => 'required|string|in:available,unavailable',
+            'status' => 'required|string|in:available,unavailable,defective',
             'category_id' => 'required|exists:categories,id',
         ];
     }
