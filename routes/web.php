@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Mail\DemoMail;
+use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,4 +56,13 @@ Route::get('users/{user}', [\App\Http\Controllers\UserController::class, 'show']
 Route::get('users/{user}/edit', [\App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
 Route::put('users/{user}', [\App\Http\Controllers\UserController::class, 'update'])->name('users.update');
 Route::delete('users/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy'); 
+
+Route::get('/send-test-mail', function () {
+    $recipient = 'test@example.com';
+    
+    // De eigenlijke verzending
+    Mail::to($recipient)->send(new DemoMail("Jasper"));
+
+    return "Check je Mailtrap inbox! De mail is onderweg.";
+});
 require __DIR__.'/auth.php';
