@@ -44,6 +44,10 @@
                     <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
                     <textarea id="description" name="description" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                 </div>
+                <div>
+                    <label for="loan_duration_days" class="block text-sm font-medium text-gray-700">Loan Duration (days):</label>
+                    <input type="number" id="loan_duration_days" name="loan_duration_days" required min="1" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200">Create Item</button>
             </form>
         </div>

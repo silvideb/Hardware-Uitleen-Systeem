@@ -28,6 +28,7 @@ class StoreHardwareRequest extends FormRequest
             'description' => 'nullable|string',
             'status' => 'required|string|in:available,unavailable',
             'category_id' => 'required|exists:categories,id',
+            'loan_duration_days' => 'required|integer|min:1',
         ];
     }
 }

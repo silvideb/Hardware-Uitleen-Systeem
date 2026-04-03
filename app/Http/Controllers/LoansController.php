@@ -17,22 +17,22 @@ class LoansController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    { 
+    {
         $loans_items = Loan::all();
         $items = Hardware_item::all();
         $loans = Loan::all();
 
         // 1. Controleer of de gebruiker een admin is
-    if (auth()->user()->is_admin) {
-        // Admin ziet alles
-        $loans = Loan::with('user')->get();
-    } else {
-        // Normale gebruiker ziet alleen eigen leningen
-        $loans = auth()->user()->loans()->with('user')->get();
-        
-        // Alternatieve methode als de relatie niet in je User model staat:
-        // $loans = Loan::where('user_id', auth()->id())->with('user')->get();
-    }
+        if (auth()->user()->is_admin) {
+            // Admin ziet alles
+            $loans = Loan::with('user')->get();
+        } else {
+            // Normale gebruiker ziet alleen eigen leningen
+            $loans = auth()->user()->loans()->with('user')->get();
+
+            // Alternatieve methode als de relatie niet in je User model staat:
+            // $loans = Loan::where('user_id', auth()->id())->with('user')->get();
+        }
         return view('loans.index', compact('loans', 'items'));
     }
 
@@ -95,11 +95,18 @@ class LoansController extends Controller
     public function store(StoreLoanRequest $storeLoanRequest)
     {
         $validatedData = $storeLoanRequest->validated();
+
+        $item = Hardware_item::findOrFail($validatedData['item_id']);
+        $startDate = Carbon::parse($validatedData['start_date']);
+        $dueDate = $startDate->copy()->addDays($item->loan_expiration_date);
+
         Loan::create(
-            
-            array_merge($validatedData, ['status' => 'pending'])
-        
-        );
+            array_merge($validatedData, [
+                'status' => 'pending',
+                'start_date' => $startDate,
+                'due_date' => $dueDate,
+            ])
+        );  
 
 
 
@@ -111,9 +118,9 @@ class LoansController extends Controller
      */
     public function show(Loan $loan)
     {
-    
+
         $items = Hardware_item::all();
-        return view('loans.show', compact('loan', 'items')); 
+        return view('loans.show', compact('loan', 'items'));
     }
 
     /**
@@ -121,10 +128,10 @@ class LoansController extends Controller
      */
     public function edit(Loan $loan)
     {
-         $users = User::all();
-         $Loans = Loan::find($loan->id);
-         $hardwareItems = Hardware_item::all();
-        return view('loans.edit', compact('loan', 'users' , 'hardwareItems'));
+        $users = User::all();
+        $Loans = Loan::find($loan->id);
+        $hardwareItems = Hardware_item::all();
+        return view('loans.edit', compact('loan', 'users', 'hardwareItems'));
     }
 
     /**
@@ -147,11 +154,11 @@ class LoansController extends Controller
     }
 
     public function markOverdue()
-    {   
-         Loan::whereDate('due_date', '<', Carbon::today())
-        ->where('status', '!=', 'returned')
-        ->update(['status' => 'overdue']);
+    {
+        Loan::whereDate('due_date', '<', Carbon::today())
+            ->where('status', '!=', 'returned')
+            ->update(['status' => 'overdue']);
 
-         return back()->with('success', 'Overdue leningen bijgewerkt');
+        return back()->with('success', 'Overdue leningen bijgewerkt');
     }
 }

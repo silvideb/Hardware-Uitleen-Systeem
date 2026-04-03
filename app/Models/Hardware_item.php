@@ -17,6 +17,7 @@ class Hardware_item extends Model
         'description',
         'status',
         'category_id',
+        'loan_duration_days',
     ];
 
     public function category()

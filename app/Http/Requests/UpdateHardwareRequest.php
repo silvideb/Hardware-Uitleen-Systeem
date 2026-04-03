@@ -28,6 +28,7 @@ class UpdateHardwareRequest extends FormRequest
             'description' => 'nullable|string',
             'status' => 'required|string|in:available,unavailable,defective',
             'category_id' => 'required|exists:categories,id',
+            'loan_duration_days' => 'required|integer|min:1',
         ];
     }
 }
