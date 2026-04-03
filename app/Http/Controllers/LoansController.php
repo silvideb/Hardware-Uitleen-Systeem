@@ -10,6 +10,8 @@ use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Mail\OrderRejectedMail; // Zorg dat je de juiste Mailable class importeert
+use Illuminate\Support\Facades\Mail;
 
 class LoansController extends Controller
 {
@@ -76,6 +78,10 @@ class LoansController extends Controller
             'status' => 'rejected',
             'reject_reason' => $validated['reject_reason'],
         ]);
+
+        // Optioneel: Stuur een notificatie of e-mail naar de gebruiker over de afwijzing
+        Mail::to($loan->user->email)->send(new OrderRejectedMail($loan));
+
 
         return redirect()->route('loans.pending')->with('success', 'Lening afgewezen!');
     }
