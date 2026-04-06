@@ -20,6 +20,11 @@
                         <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="description" name="description" rows="4">{{ old('description', $hardwareItem->description) }}</textarea>
                     </div>
 
+                     <div>
+                        <label for="loan_duration_days" class="block text-sm font-medium text-gray-700 mb-2">Loan Duration (days)</label>
+                        <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="loan_duration_days" name="loan_duration_days" value="{{ old('loan_duration_days', $hardwareItem->loan_duration_days) }}" min="1" required>
+                    </div>
+
                     <div>
                         <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Price</label>
                         <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" id="price" name="price" value="{{ old('price', $hardwareItem->price) }}" step="0.01" required>
