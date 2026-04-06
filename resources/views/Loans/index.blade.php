@@ -6,19 +6,21 @@
             </div>
 
             <div class="flex gap-2">
-                @if(auth()->check() && auth()->user()->is_admin)
+                    @if(auth()->check() && auth()->user()->is_admin)
 
                     <a href="{{ route('loans.pending') }}" class="bg-purple-500 text-white px-4 py-2 rounded">
                         Wachtende Leningen
                     </a>
 
                     <form action="{{ route('loans.checkOverdue') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">
-                    Check Overdue Leningen
-                         </button>
-</form>
-                @endif
+                        @csrf
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">
+                        <a href="{{ route('loans.index', ['status' => 'overdue']) }}">
+                        Check overdue leningen
+                        </a>
+                        </button>
+                    </form>
+                    @endif
                 <a href="{{ route('loans.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
                     Nieuwe Lening
                 </a>
@@ -37,23 +39,35 @@
                     @foreach($loans as $loan)
                         <tr class="hover:bg-gray-100"> 
 
-                            <td class="py-2 px-4 border-b">{{$loan->id}}</td>
-                            <td class="py-2 px-4 border-b">{{$loan->user->name }}</td>
-                            <td class="py-2 px-4 border-b">
-                            <span class="inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold rounded-full {{ $loan->status_badge_class }}">
+                            <td class="py-2 px-4 border-b text-center">{{$loan->id}}</td>
+                            <td class="py-2 px-4 border-b text-center">
+                            <span class="inline-flex items-center gap-1 px-2 py-1 text-s font-semibold rounded-full">
+                            {{$loan->user->name }}
+                            </span>
+                            </td>
+                            <td class="py-2 px-4 border-b text-center">
+                            <span class="inline-flex items-center gap-1 px-2 py-1 text-sm font-semibold rounded-full {{ $loan->status_badge_class }}">
                             {{ $loan->status_icon }}
                             {{ $loan->status_label }}
                             </span>
                             </td>
-                            <td class="py-2 px-4 border-b">
-                                <div class="flex gap-2 justify-center">
+                            <td class="py-2 px-4 border-b text-center">
+                                <div class="flex gap-2 w-[200px] mx-auto center">
                                     <a href="{{ route('loans.show', $loan) }}" class="bg-blue-300 text-white px-2 py-1 rounded">Bekijk</a>
                                     <a href="{{ route('loans.edit', $loan) }}" class="bg-yellow-300 text-white px-2 py-1 rounded">Bewerk</a>
                                     <form action="{{ route('loans.destroy', $loan) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded">Verwijder</button>
-                                </form>
+                                    </form>
+                                    @if ($loan->status === 'overdue')
+                                    <form method="POST" action="{{ route('loans.return', $loan->id) }}">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="bg-green-500 text-white px-2 py-1 rounded">Return</button>
+                                    </form>
+                                    @endif  
+                                </div>                                  
                             </td>
                         </tr>
                     @endforeach

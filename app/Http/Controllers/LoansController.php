@@ -18,7 +18,7 @@ class LoansController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $loans_items = Loan::all();
         $items = Hardware_item::all();
@@ -35,6 +35,15 @@ class LoansController extends Controller
             // Alternatieve methode als de relatie niet in je User model staat:
             // $loans = Loan::where('user_id', auth()->id())->with('user')->get();
         }
+
+        // query voor filteren op status userstory 22
+        $query = Loan::query();
+
+            if ($request->status === 'overdue') {
+            $query->where('status', 'overdue');
+        }
+        $loans = $query->get();
+
         return view('loans.index', compact('loans', 'items'));
     }
 
@@ -165,5 +174,13 @@ class LoansController extends Controller
             ->update(['status' => 'overdue']);
 
         return back()->with('success', 'Overdue leningen bijgewerkt');
+    }
+
+    public function markAsReturned(Loan $loan)
+    {   
+        $loan->status = 'returned';
+        $loan->save();
+
+        return redirect()->back()->with('success', 'Lening geretourneerd!');
     }
 }
