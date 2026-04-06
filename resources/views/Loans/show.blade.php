@@ -19,7 +19,7 @@
                     </p>
                 </div>
 
-                <a href="{{ route('hardware_items.index') }}" class="mt-10 inline-block bg-blue-600 text-white px-8 py-3 rounded-md text-base font-bold hover:bg-blue-700 transition">
+                <a href="{{ route('loans.index') }}" class="mt-10 inline-block bg-blue-600 text-white px-8 py-3 rounded-md text-base font-bold hover:bg-blue-700 transition">
                     Terug naar lijst
                 </a>
             </div>

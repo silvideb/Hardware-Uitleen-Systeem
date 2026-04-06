@@ -102,14 +102,13 @@ class LoansController extends Controller
     {
         $validatedData = $storeLoanRequest->validated();
 
-        $item = Hardware_item::findOrFail($validatedData['item_id']);
+        $item = Hardware_item::findOrFail($validatedData['hardware_item_id']);
         $startDate = Carbon::parse($validatedData['start_date']);
-        $dueDate = $startDate->copy()->addDays($item->loan_expiration_date);
+        $dueDate = $startDate->copy()->addDays($item->loan_duration_days);
 
         Loan::create(
             array_merge($validatedData, [
                 'status' => 'pending',
-                'start_date' => $startDate,
                 'due_date' => $dueDate,
             ])
         );  

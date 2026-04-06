@@ -30,11 +30,6 @@
                                 <input type="date" name="start_date" class="form-control" required>
                             </div>
 
-                            <div class="form-group mb-3">
-                                <label for="due_date">{{ __('Due Date') }}</label>
-                                <input type="date" name="due_date" class="form-control" required>
-                            </div>
-
                             <button type="submit" class="btn btn-primary">{{ __('Create Loan') }}</button>
                         </form>
                     </div>

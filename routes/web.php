@@ -61,7 +61,7 @@ Route::get('/send-test-mail', function () {
     $recipient = 'test@example.com';
     
     // De eigenlijke verzending
-    Mail::to($recipient)->send(new DemoMail("Jasper"));
+    Mail::to($recipient)->send(new DemoMail(auth()->user()->name));
 
     return "Check je Mailtrap inbox! De mail is onderweg.";
 });

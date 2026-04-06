@@ -15,6 +15,7 @@ class Loan extends Model
     public const STATUS_OVERDUE = 'overdue';
     public const STATUS_RETURNED = 'returned';
     public const STATUS_CANCELLED = 'cancelled';
+    public const STATUS_REJECTED = 'rejected';
 
 
     protected $fillable = [
@@ -52,6 +53,7 @@ class Loan extends Model
             self::STATUS_OVERDUE => 'Overdue',
             self::STATUS_RETURNED => 'Returned',
             self::STATUS_CANCELLED => 'Cancelled',
+            self::STATUS_REJECTED => 'Rejected',
             default => 'Unknown',
         };
     }
@@ -61,9 +63,10 @@ class Loan extends Model
     return match($this->status) {
         self::STATUS_PENDING => 'bg-yellow-100 text-yellow-800',
         self::STATUS_ACTIVE => 'bg-blue-100 text-blue-800',
-        self::STATUS_OVERDUE => 'bg-red-100 text-red-800',
+        self::STATUS_OVERDUE => 'bg-orange-100 text-orange-800',
         self::STATUS_RETURNED => 'bg-green-100 text-green-800',
         self::STATUS_CANCELLED => 'bg-gray-100 text-gray-800',
+        self::STATUS_REJECTED => 'bg-red-100 text-red-800',
         default => 'bg-gray-200 text-gray-900',
     };
     }
@@ -76,6 +79,7 @@ class Loan extends Model
         self::STATUS_ACTIVE => '📘',
         self::STATUS_PENDING => '⏳',
         self::STATUS_CANCELLED => '❌',
+        self::STATUS_REJECTED => '❌',
         default => 'ℹ️',
         };
     }
