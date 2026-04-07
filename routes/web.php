@@ -13,6 +13,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/rapport', [App\Http\Controllers\RapportController::class, 'index'])->name('rapport.index');
+Route::get('/rapport/export', [App\Http\Controllers\RapportController::class, 'export'])->name('rapport.export');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -72,8 +72,10 @@
         <a href="/categories">categorie</a>
         @auth
             <a href="/loans">loans</a>
+            
         @endauth
         <a href="/users">gebruikers</a>
+        <a href="/rapport">Rapport</a>
     </div>
 
     <div class="content">
