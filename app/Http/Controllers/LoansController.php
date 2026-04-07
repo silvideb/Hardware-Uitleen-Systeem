@@ -10,6 +10,7 @@ use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Mail\LoanAcceptedMail;
 use App\Mail\OrderRejectedMail; // Zorg dat je de juiste Mailable class importeert
 use Illuminate\Support\Facades\Mail;
 
@@ -63,6 +64,8 @@ class LoansController extends Controller
     public function accepteert(Loan $loan)
     {
         $loan->update(['status' => 'active']);
+
+        Mail::to($loan->user->email)->send(new LoanAcceptedMail($loan));
         return redirect()->route('loans.index')->with('success', 'Lening geaccepteerd!');
     }
 
