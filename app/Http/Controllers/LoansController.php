@@ -21,28 +21,23 @@ class LoansController extends Controller
      */
     public function index(Request $request)
     {
-        $loans_items = Loan::all();
         $items = Hardware_item::all();
-        $loans = Loan::all();
+        $user = auth()->user();
 
-        // 1. Controleer of de gebruiker een admin is
-        if (auth()->user()->is_admin) {
-            // Admin ziet alles
-            $loans = Loan::with('user')->get();
-        } else {
-            // Normale gebruiker ziet alleen eigen leningen
-            $loans = auth()->user()->loans()->with('user')->get();
-
-            // Alternatieve methode als de relatie niet in je User model staat:
-            // $loans = Loan::where('user_id', auth()->id())->with('user')->get();
+        if (!$user) {
+            return redirect()->route('login');
         }
 
-        // query voor filteren op status userstory 22
-        $query = Loan::query();
+        if ($user->is_admin) {
+            $query = Loan::with('user');
+        } else {
+            $query = Loan::with('user')->where('user_id', $user->id);
+        }
 
-            if ($request->status === 'overdue') {
+        if ($request->status === 'overdue') {
             $query->where('status', 'overdue');
         }
+
         $loans = $query->get();
 
         return view('loans.index', compact('loans', 'items'));
