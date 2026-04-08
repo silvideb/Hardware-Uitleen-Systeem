@@ -15,11 +15,13 @@
                     <form action="{{ route('loans.checkOverdue') }}" method="POST">
                         @csrf
                         <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">
-                        <a href="{{ route('loans.index', ['status' => 'overdue']) }}">
-                        Check overdue leningen
-                        </a>
+                            Check overdue leningen
                         </button>
                     </form>
+
+                    <a href="{{ route('loans.index', ['status' => 'overdue']) }}" class="bg-yellow-500 text-white px-4 py-2 rounded">
+                        Alle overdue leningen
+                    </a>
                     @endif
                 <a href="{{ route('loans.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
                     Nieuwe Lening
