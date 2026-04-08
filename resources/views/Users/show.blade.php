@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="mb-8">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Items in deze categorie:</h2>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">items geleend van user:</h2>
                     @if($user->loans->count() > 0)
                         <ul class="list-disc pl-5 space-y-2">
                             @foreach($user->loans as $loan)
