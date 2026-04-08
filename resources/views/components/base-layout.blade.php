@@ -76,6 +76,7 @@
         @endauth
         <a href="/users">gebruikers</a>
         <a href="/rapport">Rapport</a>
+        <a href="/dashboard">Dashboard</a>
     </div>
 
     <div class="content">
